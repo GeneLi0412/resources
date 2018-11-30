@@ -1,0 +1,1026 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd        
+ http://code.alibabatech.com/schema/dubbo          
+ http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<dubbo:monitor protocol="registry"></dubbo:monitor>
+	<dubbo:application name="permission-customer" />
+	<dubbo:registry address="${zookeeper.address}"
+		username="${zookeeper.username}" password="${zookeeper.password}" />
+
+	<!-- 所有注释接口 后期可能会用到产生 勿删 -->
+	<!-- 登录模块strat -->
+	<dubbo:reference id="accountService"
+		interface="com.chngenesis.nebula.user.service.IAccountService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="userService"
+		interface="com.chngenesis.nebula.user.service.IUserService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 登录模块end -->
+
+	<!-- 打印模块strat -->
+	<dubbo:reference id="printRecordService"
+		interface="com.chngenesis.nebula.other.service.IPrintRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 打印单据操作接口 -->
+	<dubbo:reference id="printVocherService"
+		interface="com.chngenesis.nebula.voucher.service.IPrintVocherService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 打印模块end -->
+
+	<!-- 字典表模块start -->
+	<dubbo:reference id="dictionaryDataService"
+		interface="com.chngenesis.nebula.dictionary.service.IDictionaryDataService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="dictionaryTypeService"
+		interface="com.chngenesis.nebula.dictionary.service.IDictionaryTypeService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="dictionaryUserOperationService"
+		interface="com.chngenesis.nebula.dictionary.service.IDictionaryUserOperationService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 字典表模块end -->
+
+	<!-- 基础数据start -->
+	<!-- 地址相关(省市区级联) -->
+	<dubbo:reference id="regionService"
+		interface="com.chngenesis.nebula.region.service.IRegionService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 民族，国籍 -->
+	<dubbo:reference id="nationAndNationalityService"
+		interface="com.chngenesis.nebula.dictionary.service.INationAndNationalityService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 通用字典 -->
+	<dubbo:reference id="generalDictionaryService"
+		interface="com.chngenesis.nebula.dictionary.service.IGeneralDictionaryService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 基础数据end -->
+
+	<!-- 菜单模块start -->
+	<dubbo:reference id="operatorAddressService"
+		interface="com.chngenesis.nebula.operator.service.IOperatorAddressService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="platformService"
+		interface="com.chngenesis.nebula.platform.service.IPlatformService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="configServiceImpl"
+		interface="com.chngenesis.nebula.config.service.IConfigService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 菜单模块end -->
+
+	<!-- 患者模块strat -->
+	<dubbo:reference id="patientService"
+		interface="com.chngenesis.nebula.patient.service.IPatientService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="patientCardService"
+		interface="com.chngenesis.nebula.patient.service.IPatientCardService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 患者模块end -->
+
+	<!-- 预约分诊start -->
+	<dubbo:reference id="registrationPoolService"
+		interface="com.chngenesis.nebula.registration.service.IRegistrationPoolService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="registrationService"
+		interface="com.chngenesis.nebula.registration.service.IRegistrationService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="costProjectService"
+		interface="com.chngenesis.nebula.cost.service.ICostProjectService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="costCategoriesService"
+		interface="com.chngenesis.nebula.cost.service.ICostCategoriesService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="workingGroupService"
+		interface="com.chngenesis.nebula.operator.service.IWorkingGroupService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="doctorService"
+		interface="com.chngenesis.nebula.doctor.service.IDoctorService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+
+	<dubbo:reference id="scheduleService"
+		interface="com.chngenesis.nebula.registration.service.IScheduleService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="professionalService"
+		interface="com.chngenesis.nebula.registration.service.IProfessionalService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="regpoolTemplateService"
+		interface="com.chngenesis.nebula.registration.service.IRegpoolTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 预约分诊end -->
+
+	<!-- 收费管理start -->
+	<dubbo:reference id="costService"
+		interface="com.chngenesis.nebula.cost.service.ICostService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="invoiceService"
+		interface="com.chngenesis.nebula.invoice.service.InvoiceService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="costBillsService"
+		interface="com.chngenesis.nebula.cost.service.ICostBillsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="costDetailsService"
+		interface="com.chngenesis.nebula.cost.service.ICostDetailsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 收费管理end -->
+
+	<!-- 仓库管理start -->
+	<dubbo:reference id="receiptService"
+		interface="com.chngenesis.nebula.receipt.service.IReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="wareHouseAttributeService"
+		interface="com.chngenesis.nebula.operator.service.IWareHouseAttributeService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="supplierService"
+		interface="com.chngenesis.nebula.batch.service.ISupplierService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="stockService"
+		interface="com.chngenesis.nebula.batch.service.IStockService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="drugPackService"
+		interface="com.chngenesis.nebula.drug.service.IDrugPackService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="drugStandardService"
+		interface="com.chngenesis.nebula.drug.service.IDrugStandardService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="allergicToRecordService"
+		interface="com.chngenesis.nebula.drug.service.IAllergicToRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="wareHouseService"
+		interface="com.chngenesis.nebula.batch.service.IWareHouseService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="receiptConfigurationService"
+		interface="com.chngenesis.nebula.receipt.service.IReceiptConfigurationService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="batchService"
+		interface="com.chngenesis.nebula.batch.service.IBatchService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="stockLogDetailsService"
+		interface="com.chngenesis.nebula.batch.service.IStockLogDetailsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="classificationService"
+		interface="com.chngenesis.nebula.dictionary.service.IClassificationService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="drugPriceAdjustmentReceiptService"
+		interface="com.chngenesis.nebula.drug.service.IDrugPriceAdjustmentReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="warehouseWorkingGroupService"
+		interface="com.chngenesis.nebula.operator.service.IWarehouseWorkingGroupService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 仓库管理end -->
+
+	<!-- 医生站start -->
+	<dubbo:reference id="clinicService"
+		interface="com.chngenesis.nebula.doctor.service.IClinicService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="illnessRecordService"
+		interface="com.chngenesis.nebula.patient.service.IllnessRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="underObservationRecordsService"
+		interface="com.chngenesis.nebula.patient.service.IUnderObservationRecordsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="tcdService"
+		interface="com.chngenesis.nebula.doctor.service.ITcdService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="icd10Service"
+		interface="com.chngenesis.nebula.doctor.service.Icd10Service"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="courseDiseaseService"
+		interface="com.chngenesis.nebula.doctor.service.ICourseDiseaseService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="diseaseDetailService"
+		interface="com.chngenesis.nebula.doctor.service.IDiseaseDetailService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="itemAndFrequencyUseRecordService"
+		interface="com.chngenesis.nebula.drug.service.ItemAndFrequencyUseRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="drugService"
+		interface="com.chngenesis.nebula.drug.service.IDrugService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="prescriptionGroupService"
+		interface="com.chngenesis.nebula.doctor.service.IPrescriptionGroupService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="prescriptionService"
+		interface="com.chngenesis.nebula.doctor.service.IPrescriptionService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="prescriptionDetailsService"
+		interface="com.chngenesis.nebula.doctor.service.IPrescriptionDetailsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="patientMedicalInfoService"
+		interface="com.chngenesis.nebula.patient.service.IPatientMedicalInfoService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<!-- 医生站end -->
+
+	<!-- 微信支付相关begin -->
+	<dubbo:reference id="wxPayServcie"
+		interface="com.chngenesis.nebula.wechatpay.service.IWxPayServcie"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<!-- 微信支付相关end -->
+
+	<!-- 患者预交款管理begin -->
+	<dubbo:reference id="patientFundsService"
+		interface="com.chngenesis.nebula.patient.service.IPatientFundsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="fundsDocumentsService"
+		interface="com.chngenesis.nebula.patient.service.IFundsDocumentsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="moneyFlowService"
+		interface="com.chngenesis.nebula.patient.service.IMoneyFlowService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<!-- 患者预交款管理end -->
+
+	<!-- 住院管理begin -->
+	<dubbo:reference id="hospitalizationRegisterService"
+		interface="com.chngenesis.nebula.hospitalized.service.IHospitalizationRegisterService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="bedService"
+		interface="com.chngenesis.nebula.hospitalized.service.IBedService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="areaWorkService"
+		interface="com.chngenesis.nebula.hospitalized.service.IAreaWorkService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="nurseService"
+		interface="com.chngenesis.nebula.hospitalized.service.INurseService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="diseassAreaService"
+		interface="com.chngenesis.nebula.hospitalized.service.IDiseassAreaService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="houseService"
+		interface="com.chngenesis.nebula.hospitalized.service.IHouseService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="outpatientTransferHospitalService"
+		interface="com.chngenesis.nebula.hospitalized.service.IOutpatientTransferHospitalService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 住院管理end -->
+
+	<!-- 住院医生站start -->
+	<dubbo:reference id="hospitalClinicDoctorService"
+		interface="com.chngenesis.nebula.hospitalized.service.IHospitalClinicDoctorService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="patientInfoService"
+		interface="com.chngenesis.nebula.patient.service.IPatientInfoService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 住院医生站end -->
+
+	<!-- 电子病历模板相关 begin -->
+	<dubbo:reference
+		id="electronicMedicalRecordTemplateService"
+		interface="com.chngenesis.nebula.emr.service.IElectronicMedicalRecordTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference
+		id="electronicMedicalRecordTemplateDetailService"
+		interface="com.chngenesis.nebula.emr.service.IElectronicMedicalRecordTemplateDetailService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="emrCategoryService"
+		interface="com.chngenesis.nebula.emr.service.IEmrCategoryService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 电子病历模板相关 end -->
+
+	<!-- 电子病历续写字典begin -->
+	<dubbo:reference id="continuousDictionaryService"
+		interface="com.chngenesis.nebula.emr.service.IContinuousDictionaryService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 电子病历续写字典end -->
+
+	<!-- 护理病历begin -->
+	<dubbo:reference id="nursingEnrService"
+		interface="com.chngenesis.nebula.enr.service.INursingEnrService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 护理病历end -->
+
+	<!-- 护理病历信息 begin -->
+	<dubbo:reference id="nursingEnrDetailService"
+		interface="com.chngenesis.nebula.enr.service.INursingEnrDetailService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 护理病历信息 end -->
+
+	<!-- 医嘱相关 begin -->
+	<dubbo:reference id="doctorAdviceService"
+		interface="com.chngenesis.nebula.doctoradvice.service.IDoctorAdviceService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="doctorAdviceTypeService"
+		interface="com.chngenesis.nebula.doctoradvice.service.IDoctorAdviceTypeService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="checkItemService"
+		interface="com.chngenesis.nebula.checktest.service.ICheckItemService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="frequencyService"
+		interface="com.chngenesis.nebula.doctor.service.IFrequencyService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="periodOfTimeService"
+		interface="com.chngenesis.nebula.doctor.service.IPeriodOfTimeService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="testItemService"
+		interface="com.chngenesis.nebula.checktest.service.ITestItemService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="surgeryItemService"
+		interface="com.chngenesis.nebula.surgery.service.ISurgeryItemService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="hospitalNursingNurseService"
+		interface="com.chngenesis.nebula.hospitalized.service.IHospitalNursingNurseService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="dropletAutomaticGroupService"
+		interface="com.chngenesis.nebula.doctoradvice.service.IDropletAutomaticGroupService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<!-- 医嘱相关end -->
+
+	<!-- 病案首页相关 begin -->
+	<dubbo:reference id="mrhpTemplateService"
+		interface="com.chngenesis.nebula.medicalrecord.service.IMrhpTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="mrhpTemplateStorageService"
+		interface="com.chngenesis.nebula.medicalrecord.service.IMrhpTemplateStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="mrhpControlStorageService"
+		interface="com.chngenesis.nebula.medicalrecord.service.IMrhpControlStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="mrhpManagementDetailsService"
+		interface="com.chngenesis.nebula.medicalrecord.service.IMrhpManagementDetailsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="medicalRecordService"
+		interface="com.chngenesis.nebula.medicalrecord.service.IMedicalRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 病案首页相关 end -->
+	<!-- 不良事件start -->
+	<dubbo:reference id="adeControlStorageService"
+		interface="com.chngenesis.nebula.adverseevent.service.IAdeControlStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="aneControlStorageService"
+		interface="com.chngenesis.nebula.adverseevent.service.IAneControlStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="adverseEventsService"
+		interface="com.chngenesis.nebula.adverseevent.service.IAdverseEventsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference
+		id="adverseEventsRecordTemplateService"
+		interface="com.chngenesis.nebula.adverseevent.service.IAdverseEventsRecordTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="adverseEventsRecordStorageService"
+		interface="com.chngenesis.nebula.adverseevent.service.IAdverseEventsRecordStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 不良事件end -->
+
+	<!--护理文书相关 begin -->
+	<dubbo:reference id="threeTestService"
+		interface="com.chngenesis.nebula.threetest.service.IThreeTestService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 护理文书相关 end -->
+
+	<!-- dubbo开启注解支持,通过注解进行服务的注册和调用 -->
+	<!-- <dubbo:annotation package="com.shine.icebreak.action" /> <dubbo:annotation 
+		package="com.shine.icebreak.service.impl" /> -->
+
+	<dubbo:reference id="costProInvoiceProService"
+		interface="com.chngenesis.nebula.cost.service.ICostProInvoiceProService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 诊疗材料相关 -->
+	<dubbo:reference
+		id="patientAndDiagnosisTreatmentServiceImpl"
+		interface="com.chngenesis.nebula.checktest.service.IPatientAndDiagnosisTreatmentService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!--卫材相关 begin -->
+	<dubbo:reference id="eisaiPackService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiPackService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="eisaiReceiptService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="eisaiService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="eisaiStandardService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiStandardService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="eisaiBatchService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiBatchService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="eisaiStockService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiStockService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="eisaiStockStockLogDetailsService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiStockStockLogDetailsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 卫材调价 -->
+	<dubbo:reference id="eisaiPriceService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiPriceService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference
+		id="eisaiPriceAdjustmentReceiptService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiPriceAdjustmentReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference
+		id="eisaiPriceAdjustmentReceiptDetailsService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiPriceAdjustmentReceiptDetailsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="eisaiPriceAdjustmentLogService"
+		interface="com.chngenesis.nebula.eisai.service.IEisaiPriceAdjustmentLogService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 卫材相关 end -->
+
+	<!--归档 begin -->
+	<dubbo:reference id="archivesService"
+		interface="com.chngenesis.nebula.archives.service.IArchivesService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 归档 end -->
+
+	<!--电子病历质控 begin -->
+	<dubbo:reference id="qualityControlService"
+		interface="com.chngenesis.nebula.qualitycontrol.service.IQualityControlService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="qualityScoreStorageService"
+		interface="com.chngenesis.nebula.qualitycontrol.service.IQualityScoreStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="electronicMedicalRecordService"
+		interface="com.chngenesis.nebula.emr.service.IElectronicMedicalRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 电子病历质控 end -->
+
+	<!--临床路径 begin -->
+	<dubbo:reference id="pathwayStandardDepartmentService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPathwayStandardDepartmentService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="icd9Service"
+		interface="com.chngenesis.nebula.surgery.service.Icd9Service"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="clinicalPathwayService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IClinicalPathwayService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="pathwayConfigStageService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPathwayConfigStageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="pathwayConfigStageDetailsService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPathwayConfigStageDetailsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="pathwayAdviceTemplateService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPathwayAdviceTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="clinicalPathwayConditionService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IClinicalPathwayConditionService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="pathwayConfigAndIcd10Service"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPathwayConfigAndIcd10Service"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="patientPathwayService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPatientPathwayService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference
+		id="patientPathwayAndStageVariationService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPatientPathwayAndStageVariationService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference
+		id="patientPathwayAndStageDetailService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPatientPathwayAndStageDetailService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="patientPathwayAndStageService"
+		interface="com.chngenesis.nebula.clinicalpathway.service.IPatientPathwayAndStageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 临床路径 end -->
+
+
+	<!-- ***************************************************护理电子病历*************************************************** -->
+	<dubbo:reference id="nursingTemplateService"
+		interface="com.chngenesis.nebula.enr.service.INursingTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="nursingTemplateDetailService"
+		interface="com.chngenesis.nebula.enr.service.INursingTemplateDetailService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<!-- ***************************************************护理电子病历*************************************************** -->
+	<!-- 血库 start -->
+	<dubbo:reference id="bloodRegisterService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodRegisterService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="pumpingSupplyService"
+
+		interface="com.chngenesis.nebula.bloodstorage.service.IPumpingSupplyService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="bloodService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="bloodStandardService"
+
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodStandardService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="bloodStockService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodStockService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="bloodTransfApplyService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodTransfApplyService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="outsideHospitalService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IOutsideHospitalService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+
+	<dubbo:reference id="bloodApplyStockService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodApplyStockService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+
+	<dubbo:reference id="useBloodRecheckService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IUseBloodRecheckService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<dubbo:reference id="useBloodAntScrService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IUseBloodAntScrService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<dubbo:reference id="bloodSampleService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodSampleService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<dubbo:reference id="bloodTransfReactionService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodTransfReactionService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<dubbo:reference id="bloodBagRecoveryService"
+		interface="com.chngenesis.nebula.bloodstorage.service.IBloodBagRecoveryService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 血库end -->
+	<!-- 收预交begin -->
+	<dubbo:reference id="acceptingTheAmountService"
+		interface="com.chngenesis.nebula.accepting.service.IAcceptingTheAmountService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="patientBusinessAccountService"
+		interface="com.chngenesis.nebula.accepting.service.IPatientBusinessAccountService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="accepSettlementRecordsService"
+		interface="com.chngenesis.nebula.accepting.service.IAccepSettlementRecordsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="businessDeductionDetailsService"
+		interface="com.chngenesis.nebula.accepting.service.IBusinessDeductionDetailsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="settlementRecordService"
+		interface="com.chngenesis.nebula.accepting.service.ISettlementRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 收预交end -->
+
+	<!-- 电子病历词条start -->
+	<dubbo:reference id="userEntryService"
+		interface="com.chngenesis.nebula.emr.service.IUserEntryService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 电子病历词条end -->
+
+	<!-- 病案 -->
+	<dubbo:reference id="mraBorrowingService"
+		interface="com.chngenesis.nebula.mra.service.IMraBorrowingService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="mraPageCopyService"
+		interface="com.chngenesis.nebula.mra.service.IMraPageCopyService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="mraPageCopyStorageService"
+		interface="com.chngenesis.nebula.mra.service.IMraPageCopyStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="mraPrintingService"
+		interface="com.chngenesis.nebula.mra.service.IMraPrintingService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 病案 -->
+
+	<!-- 用户工作组 -->
+	<dubbo:reference id="userGroupMemberService"
+		interface="com.chngenesis.nebula.operator.service.IUserGroupMemberService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 用户工作组 -->
+
+	<!-- 检验申请单及模板 start -->
+	<dubbo:reference id="testItemApplyReceiptService"
+		interface="com.chngenesis.nebula.checktest.service.ITestItemApplyReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="testApplyReceiptTemplateService"
+		interface="com.chngenesis.nebula.checktest.service.ITestApplyReceiptTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 检验申请单及模板 end -->
+
+	<!-- 检查申请单及模板 start -->
+	<dubbo:reference id="checkItemApplyReceiptService"
+		interface="com.chngenesis.nebula.checktest.service.ICheckItemApplyReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="checkApplyReceiptTemplateService"
+		interface="com.chngenesis.nebula.checktest.service.ICheckApplyReceiptTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 检查申请单及模板 end -->
+
+	<!-- 手术申请单 end -->
+	<dubbo:reference id="surgertApplyReceiptService"
+		interface="com.chngenesis.nebula.surgery.service.ISurgertApplyReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 手术申请单 end -->
+	<!-- 门诊中药处方Start -->
+	<dubbo:reference id="chmPrescriptionService"
+		interface="com.chngenesis.nebula.doctor.service.IChmPrescriptionService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 门诊中药处方 End -->
+
+	<!-- 护理单相关 Start -->
+	<dubbo:reference id="nurDocTemDetStorageService"
+		interface="com.chngenesis.nebula.threetest.service.INurDocTemDetStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="nurDocTemDetDataStorageService"
+		interface="com.chngenesis.nebula.threetest.service.INurDocTemDetDataStorageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="nurDocTemDetService"
+		interface="com.chngenesis.nebula.threetest.service.INurDocTemDetService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="nursingSuccessionRecordService"
+		interface="com.chngenesis.nebula.threetest.service.INursingSuccessionRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="nurDocTemService"
+		interface="com.chngenesis.nebula.threetest.service.INurDocTemService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 护理单相关 End -->
+
+	<!-- 三级医师 -->
+	<dubbo:reference id="threeLevelDoctorService"
+		interface="com.chngenesis.nebula.thrlevdoc.service.IThreeLevelDoctorService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 三级医师 -->
+
+	<!-- 支付宝 -->
+	<dubbo:reference id="alipayService"
+		interface="com.chngenesis.nebula.alipay.service.IAlipayService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 支付宝 -->
+
+	<!-- 病案首页费用 Start -->
+	<dubbo:reference id="mrCostprojectService"
+		interface="com.chngenesis.nebula.cost.service.IMrCostprojectService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="mrChargeItemsService"
+		interface="com.chngenesis.nebula.cost.service.IMrChargeItemsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 病案首页费用 End -->
+
+	<!-- 项目与医嘱事件start -->
+	<dubbo:reference id="itemDoctorAdviceTypeService"
+		interface="com.chngenesis.nebula.doctoradvice.service.ItemDoctorAdviceTypeService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 项目与医嘱事件end -->
+
+	<!-- 用药途径和药品/剂型start -->
+	<dubbo:reference id="drugAndUseUsageService"
+		interface="com.chngenesis.nebula.drug.service.IDrugAndUseUsageService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 用药途径和药品/剂型end -->
+
+	<!-- 收费项目类型start -->
+	<dubbo:reference id="costTypeService"
+		interface="com.chngenesis.nebula.cost.service.ICostTypeService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 收费项目类型end -->
+
+	<!-- 病历质控分数分类管理start -->
+	<dubbo:reference id="qualityContrClassService"
+		interface="com.chngenesis.nebula.qualitycontrol.service.IQualityContrClassService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="qualityClassTypeService"
+		interface="com.chngenesis.nebula.qualitycontrol.service.IQualityClassTypeService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="qualityClassControlseService"
+		interface="com.chngenesis.nebula.qualitycontrol.service.IQualityClassControlseService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="qualityScoreBranchService"
+		interface="com.chngenesis.nebula.qualitycontrol.service.IQualityScoreBranchService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 病历质控分数分类管理end -->
+
+	<!-- 病历模板类型与医嘱事件关联start -->
+	<dubbo:reference id="emrCategoryAndAdviceService"
+		interface="com.chngenesis.nebula.emr.service.IEmrCategoryAndAdviceService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 病历模板类型与医嘱事件关联end -->
+
+	<!-- 过程质控start -->
+	<dubbo:reference id="qualityProcessService"
+		interface="com.chngenesis.nebula.qualitycontrol.service.IQualityProcessService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 过程质控end -->
+
+	<!-- 发药单相关start -->
+	<dubbo:reference id="sendPillsService"
+		interface="com.chngenesis.nebula.sendpills.service.ISendPillsService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 发药单相关end -->
+
+	<!-- 微信回调start -->
+	<dubbo:reference id="wechatNotifyService"
+		interface="com.chngenesis.nebula.wechatpay.service.IWechatNotifyService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 微信回调end -->
+
+	<!-- 收费室扎账start -->
+	<dubbo:reference id="accountsBillService"
+		interface="com.chngenesis.nebula.cost.service.IAccountsBillService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 收费室扎账end -->
+
+	<!-- 医嘱单执行信息start -->
+	<dubbo:reference id="doctorAdviceExecuteService"
+		interface="com.chngenesis.nebula.doctoradvice.service.IDoctorAdviceExecuteService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 医嘱单执行信息end -->
+
+	<!-- 违规电子病历统计 -->
+	<dubbo:reference id="illegalStatisticEmrService"
+		interface="com.chngenesis.nebula.qualitycontrol.service.IIllegalStatisticEmrService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 违规电子病历统计 -->
+
+	<!-- 发票start -->
+	<dubbo:reference id="invoiceReceiptService"
+		interface="com.chngenesis.nebula.invoice.service.InvoiceReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="invoiceTypeService"
+		interface="com.chngenesis.nebula.invoice.service.InvoiceTypeService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="invoiceConfigService"
+		interface="com.chngenesis.nebula.invoice.service.InvoiceConfigService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="invoiceStockService"
+		interface="com.chngenesis.nebula.invoice.service.InvoiceStockService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 发票end -->
+
+	<!-- 输液单相关 -->
+	<dubbo:reference id="infusionDetailAndExecutionService"
+		interface="com.chngenesis.nebula.infusionsheet.service.InfusionDetailAndExecutionService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="iInfusionSingleService"
+		interface="com.chngenesis.nebula.infusionsingle.service.IInfusionSingleService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="infusionSheetDetailService"
+		interface="com.chngenesis.nebula.infusionsheet.service.InfusionSheetDetailService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="infusionSheetService"
+		interface="com.chngenesis.nebula.infusionsheet.service.InfusionSheetService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+
+	<dubbo:reference id="allergyTestService"
+		interface="com.chngenesis.nebula.infusionsheet.service.IAllergyTestService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="allergyTestExecutionService"
+		interface="com.chngenesis.nebula.infusionsheet.service.IAllergyTestExecutionService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 输液单相关 -->
+
+	<!-- 会诊相关 -->
+	<dubbo:reference id="consultationService"
+		interface="com.chngenesis.nebula.consultation.service.IConsultationService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 会诊相关 -->
+
+	<!-- 报表相关 -->
+	<dubbo:reference id="outpatientRegistReportService"
+		interface="com.chngenesis.nebula.reportsurface.service.IOutpatientRegistReportService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="inHospitalReportService"
+		interface="com.chngenesis.nebula.reportsurface.service.InHospitalReportService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="generalReportService"
+		interface="com.chngenesis.nebula.reportdiseases.service.IGeneralReportService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<dubbo:reference id="documentsReportService"
+		interface="com.chngenesis.nebula.reportdiseases.service.IDocumentsReportService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}" />
+	<!-- 报表相关 -->
+
+	<!-- 模板相关 -->
+	<dubbo:reference id="definitionTemplateService"
+		interface="com.chngenesis.nebula.template.service.IDefinitionTemplateService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 模板相关 -->
+
+	<!-- 病历模板详情 -->
+	<dubbo:reference
+		id="electronicMedicalRecordDetailService"
+		interface="com.chngenesis.nebula.emr.service.IElectronicMedicalRecordDetailService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 病历模板详情 -->
+
+	<!-- 词条配置 -->
+	<dubbo:reference id="vocabularyEntryFuncService"
+		interface="com.chngenesis.nebula.config.service.IVocabularyEntryFuncService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 词条配置 -->
+
+	<!-- 上报相关 -->
+	<dubbo:reference id="reportRecordService"
+		interface="com.chngenesis.nebula.reportdiseases.service.IReportRecordService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<dubbo:reference id="keywordReportDiseasesService"
+		interface="com.chngenesis.nebula.reportdiseases.service.IKeywordReportDiseasesService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 上报相关 -->
+
+	<!-- 药品申领单start -->
+	<dubbo:reference id="drugApplyReceiptService"
+		interface="com.chngenesis.nebula.drugapply.service.IDrugApplyReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 药品申领单end -->
+
+	<!-- 批次价格单据 -->
+	<dubbo:reference
+		id="batchPriceAdjustmentReceiptService"
+		interface="com.chngenesis.nebula.batch.service.IBatchPriceAdjustmentReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 批次价格单据 -->
+
+	<!-- 库存回退单据 -->
+	<dubbo:reference id="retiringReceiptService"
+		interface="com.chngenesis.nebula.batch.service.IRetiringReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 库存回退单据 -->
+
+	<!-- 其他出库单 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.receipt.service.IOtherOutBillsService"
+		id="otherOutBillsService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 其他出库单 -->
+
+	<!-- 报损单 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.receipt.service.IReportLossBillsService"
+		id="reportLossBillsService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 报损单 -->
+
+	<!-- 初始化盘点 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.receipt.service.IInitInventoryReceiptService"
+		id="initInventoryReceiptService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 初始化盘点 -->
+
+	<!-- 转科 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.hospitalized.service.ITransferRecordService"
+		id="transferRecordService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 转科 -->
+
+	<!-- 样本费用组套 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.checktest.service.ISampleAndCostService"
+		id="sampleAndCostService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 样本费用组套 -->
+
+	<!-- 住院担保相关 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.security.service.ICollateralMoneyRecordService"
+		id="collateralMoneyRecordService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<dubbo:reference
+		interface="com.chngenesis.nebula.security.service.ICollateralTypeService"
+		id="collateralTypeService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 住院担保相关 -->
+
+	<!-- 采购计划 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.purplan.service.IPurchasePlanService"
+		id="purchasePlanService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 采购计划 -->
+
+	<!-- 供应商退库 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.retiring.service.ISuppilerRetiringReceiptService"
+		id="suppilerRetiringReceiptService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 供应商退库 -->
+
+	<!-- 病区退药 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.sendpills.service.IBackPillService"
+		id="backPillService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 病区退药 -->
+
+	<!-- 公共药品申请 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.drugapply.service.IPublicDrugApplyReceiptService"
+		id="publicDrugApplyReceiptService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 公共药品申请 -->
+
+	<!-- 药品入库调价start -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.drugprice.service.IDrugJoinPriceAdjustmentReceiptService"
+		id="drugJoinPriceAdjustmentReceiptService"
+		timeout="${zookeeper.timeout}" version="${zookeeper.version}"></dubbo:reference>
+	<!-- 药品入库调价end -->
+
+	<!-- 病案首页标签基础start -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.mra.service.IMraPageLabelService"
+		id="mraPageLabelService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 病案首页标签基础end -->
+
+	<!-- 门诊电子病历相关start -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.omr.service.IOutpatientTemplateDetailService"
+		id="outpatientTemplateDetailService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+
+	<dubbo:reference
+		interface="com.chngenesis.nebula.omr.service.IOutpatientTemplateService"
+		id="outpatientTemplateService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 门诊电子病历相关end -->
+
+	<!-- 新生儿报卡start -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.newbaby.service.INewBabyReportService"
+		id="newBabyReportService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 新生儿报卡end -->
+
+	<!-- 库存操作详情相关 -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.batch.service.IStockOperationDetailsService"
+		id="stockOperationDetailsService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 库存操作详情相关 -->
+
+	<!-- 住院部收费室交账start -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.cost.service.InpatientAccountHandoverService"
+		id="inpatientAccountHandoverService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 住院部收费室交账end -->
+
+	<!-- Session缓存start -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.session.service.ISessionCacheService"
+		id="sessionCacheService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- Session缓存end -->
+
+	<dubbo:reference
+		interface="com.chngenesis.nebula.hospitalized.service.IDiseassAreaPermissionsService"
+		id="diseassAreaPermissionsService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+		
+   <!-- 日常盘点start -->
+   	<dubbo:reference
+		interface="com.chngenesis.nebula.receipt.service.IDailyInventoryReceiptService"
+		id="dailyInventoryReceiptService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+   <!-- 日常盘点end -->
+   
+   <!-- 三级医师相关 start -->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.emr.service.ICheckDoctorService"
+		id="checkDoctorService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	
+	<!-- 三级医师相关 end -->
+	
+	<!-- 库存冻结信息 start-->
+	<dubbo:reference
+		interface="com.chngenesis.nebula.batch.service.IStockFreezeInfoService"
+		id="stockFreezeInfoService" timeout="${zookeeper.timeout}"
+		version="${zookeeper.version}"></dubbo:reference>
+	<!-- 库存冻结信息end -->
+</beans> 

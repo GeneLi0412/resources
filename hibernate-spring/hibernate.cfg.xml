@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- 配置Hibernate的基本属性 -->
+        <!-- 1.数据源配置到IOC容器中 -->
+        <!-- 2.关联的.hbm.xml也在IOC容器配置SessionFactory实例 -->
+        <!-- 3.配置Hibernate的基本属性：方言，SQL显示及格式化，生成数据表的策略以及二级缓存 -->
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+
+        <mapping class="com.chngenesis.nebula.entity.user.Account"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.dictionary.DictionaryType"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.dictionary.DictionaryData"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.dictionary.Classification"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.dictionary.DictionaryUserOperation"/>
+        <mapping class="com.chngenesis.nebula.entity.user.User"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.OperatorAddress"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.OperatorPermission"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.Permission"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.UserGroupMember"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.WorkingGroup"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.platform.Platform"/>
+        <mapping class="com.chngenesis.nebula.entity.patient.Patient"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.DoorPatientInfo"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.PatientCard"/>
+        <mapping class="com.chngenesis.nebula.entity.doctor.Doctor"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.Prescription"/>
+        <mapping class="com.chngenesis.nebula.entity.doctor.Tcd"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.PrescriptionDetails"/>
+        <mapping class="com.chngenesis.nebula.entity.doctor.Clinic"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.CourseDisease"/>
+        <mapping class="com.chngenesis.nebula.entity.doctor.Frequency"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.PrescriptionGroup"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.DiseaseDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.PrescriptionDrug"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.PeriodOfTime"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.CMDiseaseDetail"/>
+        <mapping class="com.chngenesis.nebula.entity.cost.Cost"/>
+        <mapping class="com.chngenesis.nebula.entity.cost.CostDetails"/>
+        <mapping class="com.chngenesis.nebula.entity.cost.CostProject"/>
+        <mapping class="com.chngenesis.nebula.entity.cost.CostSettle"/>
+        <mapping class="com.chngenesis.nebula.entity.cost.CostType"/>
+        <mapping class="com.chngenesis.nebula.entity.cost.CostBills"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.CostProInvoicePro"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.CostCategories"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.PriceCharged"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.CostProAndPriceCharged"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.CostContent"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.CostCostCategories"/>
+        <mapping class="com.chngenesis.nebula.entity.config.Config"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.registration.GuideDesk"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.registration.RegistrationPool"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.registration.RegpoolTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.registration.Professional"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.WareHouseAttribute"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsingle.InfusionSingle"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsingle.InfusionSingleAndDoctorAdvice"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.registration.DoctorProfessional"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.registration.Registration"/>
+        <mapping class="com.chngenesis.nebula.entity.invoice.Invoice"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceCharging"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceCost"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceConfig"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceReceiptDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceStock"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceType"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceUseLog"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceProjectType"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.invoice.InvoiceProject"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.dictionary.DictionaryUserOperation"/>
+        <mapping class="com.chngenesis.nebula.entity.drug.Drug"/>
+        <mapping class="com.chngenesis.nebula.entity.drug.DrugPack"/>
+        <mapping class="com.chngenesis.nebula.entity.drug.DrugPrice"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugPriceAdjustmentLog"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugPriceAdjustmentReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugPriceAdjustmentReceiptDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugStandard"/>
+        <mapping class="com.chngenesis.nebula.entity.drug.DrugPrice"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugPriceAdjustmentLog"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DoseTypeAndUseUsage"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.ItemAndFrequencyUseRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugAndUseUsage"/>
+        <mapping class="com.chngenesis.nebula.entity.drug.DrugAllergy"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.SocialSecurity"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.BasicMedicine"/>
+        <mapping class="com.chngenesis.nebula.entity.drug.DrugType"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugPublicInformation"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.AllergicToRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.ItemDoctorAdviceType"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugPriceAdjustmentReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugPriceAdjustmentReceiptDetails"/>
+        <mapping class="com.chngenesis.nebula.entity.receipt.Receipt"/>
+        <mapping class="com.chngenesis.nebula.entity.batch.Supplier"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.receipt.ReceiptConfiguration"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.receipt.ReceiptOperationRecord"/>
+        <mapping class="com.chngenesis.nebula.entity.batch.Batch"/>
+        <mapping class="com.chngenesis.nebula.entity.batch.WareHouse"/>
+        <mapping class="com.chngenesis.nebula.entity.batch.Stock"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.batch.StockLogDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.batch.StockOperationDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.DiseassAreaAndWareHouse"/>
+        <!-- <mapping class="com.chngenesis.nebula.entity.batch.Manufacturer" />
+            <mapping class="com.chngenesis.nebula.entity.batch.ManufacturerDrug" /> -->
+        <mapping
+                class="com.chngenesis.nebula.entity.address.AddressInfo"/>
+        <mapping class="com.chngenesis.nebula.entity.doctor.Icd10"/>
+        <mapping class="com.chngenesis.nebula.entity.surgery.Icd9"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.DiseaseDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.PrescriptionDrug"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.certification.CertificationConfigure"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.certification.Certification"/>
+
+        <mapping class="com.chngenesis.nebula.entity.other.Code"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.other.PrintRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.PatientMedicalInfo"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.eisai.EisaiStockRecord"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.wechatmp.WechatPatient"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.registration.Schedule"/>
+
+        <mapping class="com.chngenesis.nebula.entity.drug.Medicare"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugMedicare"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.WareHousePermission"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.WareHousePermissions"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.MoneyFlow"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.PatientFunds"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.FundsDocuments"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.WMIllnessRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.CMIllnessRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.EDIllnessRecord"/>
+        <mapping class="com.chngenesis.nebula.entity.patient.Seat"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.UnderObservationRecords"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.CostBanlanceBill"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.PrescriptionDiagnosis"/>
+
+        <!-- 电子病历 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.ElectronicMedicalRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.ElectronicMedicalRecordDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.ElectronicMedicalRecordTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.ElectronicMedicalRecordTemplateDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.ElectronicMedicalRecordTemplateWork"/>
+        <mapping class="com.chngenesis.nebula.entity.emr.EmrCategory"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.ContinuousWriting"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.ContinuousDictionary"/>
+        <mapping class="com.chngenesis.nebula.entity.emr.Mutex"/>
+        <mapping class="com.chngenesis.nebula.entity.emr.UserEntry"/>
+        <mapping class="com.chngenesis.nebula.entity.emr.EntryContent"/>
+        
+        <mapping class="com.chngenesis.nebula.entity.emr.CheckDoctor"/>
+        
+        <mapping class="com.chngenesis.nebula.entity.emr.CheckRecord"/>
+        
+        <!-- 电子病历 end -->
+
+
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.AreaWork"/>
+        <mapping class="com.chngenesis.nebula.entity.hospitalized.Bed"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.ObstetricTable"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.BedCost"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.BedUseInfo"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.DiseassArea"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.HospitalizationRegister"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.House"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.Nurse"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.HospitalizationRegisterICD"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.antibiotic.AntibioticDrug"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.antibiotic.AntibioticPermission"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.antibiotic.AntibioticPermissions"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.DiseassAreaPermissions"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.DiseassAreaPermission"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.NurseDiseaJurisdictionGroup"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.wechatpay.WechatNotify"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.HospitalizationRegisterLog"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.HospitalClinicDoctor"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.HospitalNursingNurse"/>
+        <!-- 收治入院 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.OutpatientTransferHospital"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.TransferRecord"/>
+        <!-- 收治入院 -->
+
+        <mapping class="com.chngenesis.nebula.entity.cost.CostType"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.ClinicCost"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.PatientInfo"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.DoctorAdvice"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.DoctorAdviceType"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.DoctorAdviceProofreading"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.DoctorAdviceBusinessRecords"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugUsageAndItem"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.TreatmentAndWorkGroup"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.PatientAndDiagnosisTreatment"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.DoctorAdviceExecute"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.DoctorAdviceGroup"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.DropletAutomaticGroup"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.TestItem"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.TreatmentItem"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.patient.SkinResult"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.CheckItem"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.doctoradvice.DocadvPre"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.Subcontract"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.DoctorPermission"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.DoctorPermissions"/>
+        <mapping class="com.chngenesis.nebula.entity.surgery.Icd9"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.surgery.SurgeryItem"/>
+
+        <mapping class="com.chngenesis.nebula.entity.assets.Assets"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.assets.AssetsPurchaseFixed"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.assets.AssetsRecordHistorical"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.assets.DepreciationRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.assets.AssetsOperationRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.assets.AssetsPurchaseRecord"/>
+
+
+        <mapping class="com.chngenesis.nebula.entity.blood.BloodItem"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.threetest.ThreeTestRecord"/>
+
+        <mapping class="com.chngenesis.nebula.entity.eisai.Eisai"/>
+        <mapping class="com.chngenesis.nebula.entity.eisai.EisaiPack"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.eisai.EisaiStandard"/>
+        <mapping class="com.chngenesis.nebula.entity.eisai.EisaiBatch"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.eisai.EisaiReceipt"/>
+        <mapping class="com.chngenesis.nebula.entity.eisai.EisaiStock"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.eisai.EisaiStockStockLogDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.eisai.EisaiStockStockOperationDetails"/>
+        <mapping class="com.chngenesis.nebula.entity.eisai.EisaiPrice"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.eisai.EisaiPriceAdjustmentLog"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.eisai.EisaiPriceAdjustmentReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.eisai.EisaiPriceAdjustmentReceiptDetails"/>
+
+
+        <mapping
+                class="com.chngenesis.nebula.entity.medicalrecord.MrhpTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.medicalrecord.MrhpManagementDetails"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.adverseevent.AdeControlStorage"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.adverseevent.AdverseDrugEvents"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.adverseevent.AdverseEvents"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.adverseevent.AdverseEventsRecordStorage"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.adverseevent.AdverseEventsRecordTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.adverseevent.AdverseEventsRecordTemplateStorage"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.adverseevent.AdverseNurseEvents"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.adverseevent.AneControlStorage"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.archives.Archives"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.archives.ArchivesEmr"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.archives.ArchivesEnr"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.archives.ArchivesLog"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.Grades"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.QualityControl"/>
+        <mapping class="com.chngenesis.nebula.entity.region.Region"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.dictionary.GeneralDictionary"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.dictionary.NationAndNationality"/>
+        <!-- 血库管理 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.Blood"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodStandard"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodRegister"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodRegisterDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodStockLog"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodRegisterConfiguration"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.PumpingSupply"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodStock"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodTransfApply"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodTransfApplyDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.OutsideHospital"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodApplyStock"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodSample"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.UseBloodAntScr"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.UseBloodRecheck"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodTransfReaction"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.bloodstorage.BloodBagRecovery"/>
+        <!-- 血库管理 -->
+
+
+        <!-- 临床路径 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.ClinicalPathway"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.ClinicalPathwayCondition"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.ClinicalPathwayConfig"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PathwayAdviceTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PathwayConfigAndIcd10"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PathwayConfigAndIcd9"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PathwayConfigAndWorkGroup"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PathwayConfigStage"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PathwayConfigStageDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PathwayStandardDepartment"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PatientPathway"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PatientPathwayAndCondition"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PatientPathwayAndStage"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PatientPathwayAndStageDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PatientPathwayAndStageVariation"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.PatientPathwayRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.clinicalpathway.MutationCausesRelation"/>
+        <!-- 临床路径 -->
+
+
+        <!-- 护理电子病历 开始 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.enr.NursingTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.enr.NursingTemplateDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.enr.NursingTemplateWork"/>
+        <mapping class="com.chngenesis.nebula.entity.enr.NursingEnr"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.enr.NursingEnrDetail"/>
+        <mapping class="com.chngenesis.nebula.entity.enr.UserEntryEnr"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.enr.UserEntryContentEnr"/>
+        <!-- 护理电子病历 结束 -->
+
+        <!-- 收预交 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.accepting.AccepSettlementRecords"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.accepting.AcceptingTheAmount"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.accepting.BusinessDeductionDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.accepting.PatientBusinessAccount"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.accepting.SettlementRecord"/>
+        <!-- 收预交 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.accepting.OneselfCostProportion"/>
+
+        <!-- 病案首页管理 -->
+        <mapping class="com.chngenesis.nebula.entity.mra.MraBorrowing"/>
+        <mapping class="com.chngenesis.nebula.entity.mra.MraPageCopy"/>
+        <mapping class="com.chngenesis.nebula.entity.mra.MraPrinting"/>
+        <!-- 病案首页管理 -->
+
+        <!-- 病历质控 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.QualityClassControlse"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.QualityContrClass"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.QualityClassType"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.QualityProcess"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.QualityContrTime"/>
+        <!-- 病历质控 -->
+
+        <!-- 中药处方 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.ChmPrescription"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.doctor.ChmPrescriptionDetails"/>
+        <!-- 中药处方 -->
+
+        <!-- 检验申请单 start -->
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.TestItemApplyReceiptDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.TestItemApplyReceipt"/>
+        <!-- 检验申请单模板 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.TestApplyReceiptTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.TestApplyReceiptTemplateDetails"/>
+        <!-- 检验申请单 end -->
+
+        <!-- 检查申请单 start -->
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.CheckItemApplyReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.CheckItemApplyReceiptDetails"/>
+        <!-- 检验申请单模板 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.CheckApplyReceiptTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.CheckApplyReceiptTemplateDetails"/>
+
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.CheckInspectionArea"/>
+        <!-- 检查申请单 end -->
+
+        <!--发药单相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.sendpills.SendPills"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.sendpills.SendPillsDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.sendpills.SendPillsReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.sendpills.SendPillsReceiptDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.sendpills.SendPillsStock"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.sendpills.BackPillDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.sendpills.BackPill"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.sendpills.DispensingWindow"/>
+        <!--发药单相关 -->
+
+        <!--病历医嘱关系相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.EmrAndAdviceRelevan"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.EmrCategoryAndAdvice"/>
+        <!--病历医嘱关系相关 -->
+
+        <!-- 三级医师 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.thrlevdoc.ThreeLevelDoctor"/>
+        <!-- 三级医师 -->
+
+        <!-- 收费室扎账start -->
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.AccountsBill"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.PaymentCheckoutDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.AccountCategoryDetails"/>
+        <!-- 收费室扎账end -->
+
+        <!--病案首页费用项目相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.MrChargeItems"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.MrCostproject"/>
+        <!--病案首页费用项目相关 -->
+
+
+        <!--护理单相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.threetest.NurDocTem"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.threetest.NurDocTemDet"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.threetest.NurDocTemDisAre"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.threetest.NurDocTemHeader"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.threetest.NurDocTemHeaTheTesRec"/>
+        <!--护理单相关 -->
+
+        <!--病历作废日志 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.EmrDiscardedLog"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.enr.EnrDiscardedLog"/>
+        <!--病历作废日志 -->
+
+        <!-- 护理交班 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.threetest.NursingSuccessionRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.threetest.NursingSuccessionRecordDetail"/>
+        <!-- 护理交班 -->
+        <!-- 手术申请 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.surgery.SurgertApplyReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.surgery.SurgertApplyReceiptDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.surgery.SurgertApplyReceiptAndIcd10"/>
+        <!-- 手术申请 -->
+
+        <!-- 病案回退日志 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.log.MrcpSendBackLog"/>
+        <!-- 病案回退日志 -->
+
+        <!-- 违规病历统计 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.IllegalStatisticEmr"/>
+        <!-- 违规病历统计 -->
+
+        <!-- 历史电子病历查看权限表 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.HistoryEmrCheckAuthority"/>
+        <!-- 历史电子病历查看权限表 -->
+
+        <!-- 质控评分基本要求 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.qualitycontrol.QualityScoreBranch"/>
+        <!-- 质控评分基本要求 -->
+
+        <!-- 医疗机构 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.hospitalized.MedicalInstitutions"/>
+        <!-- 医疗机构 -->
+
+        <!-- 中药颗粒 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.drug.DrugModality"/>
+        <!-- 中药颗粒 -->
+
+        <!-- 抗生素权限 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.microbiotic.MicrobioticDrug"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.microbiotic.MicrobioticPermission"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.microbiotic.MicrobioticPermissions"/>
+        <!-- 抗生素权限 -->
+
+        <!-- 输液单相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsheet.InfusionAndInfusionDeatil"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsheet.InfusionDetailAndExecution"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsheet.InfusionDetailAndPrescripDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsheet.InfusionSheet"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsheet.InfusionSheetDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsheet.AllergyTest"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.infusionsheet.AllergyTestExecution"/>
+        <!-- 输液单相关 -->
+
+        <!-- 会诊记录 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.consultation.Consultation"/>
+        <!-- 会诊记录 -->
+
+        <!-- 电子病历提交栈 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.EmrSubmitStacks"/>
+        <!-- 电子病历提交栈 -->
+
+        <!-- 模板 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.template.DefinitionTemplate"/>
+        <!-- 模板 -->
+
+        <!-- 电子病历提交记录 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.emr.EmrSubmitRecord"/>
+        <!-- 电子病历提交记录 -->
+
+        <!-- 电子病历审核日志 -->
+        <mapping class="com.chngenesis.nebula.entity.emr.EmrAuditLog"/>
+        <!-- 电子病历审核日志 -->
+
+        <!-- 词条功能 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.config.VocabularyEntryFunc"/>
+        <!-- 词条功能 -->
+
+        <!-- 上报相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.reportdiseases.ReportDiseases"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.reportdiseases.ReportRecord"/>
+        <!-- 上报相关 -->
+
+        <!-- 科室仓库关联相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.WorkingGroupAttribute"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.WarehouseWorkingGroup"/>
+        <!-- 科室仓库关联相关 -->
+
+        <!-- 科室范围相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.WorkingGroupScope"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.operator.WorkGroupScopeAssociated"/>
+        <!-- 科室范围相关 -->
+
+        <!-- 仓库默认包装 -->
+        <mapping class="com.chngenesis.nebula.entity.drug.DefaultPack"/>
+        <!-- 仓库默认包装 -->
+
+        <!-- 药品加成率 -->
+        <mapping class="com.chngenesis.nebula.entity.drug.DrugMarkup"/>
+        <!-- 药品加成率 -->
+
+        <!-- 库存量预警 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.batch.StockWarning"/>
+        <!-- 库存量预警 -->
+
+        <!-- 批次价格 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.batch.BatchPriceAdjustmentReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.batch.BatchPriceAdjustmentReceiptDetails"/>
+        <mapping class="com.chngenesis.nebula.entity.batch.BatchPrice"/>
+        <!-- 批次价格 -->
+
+        <!-- 药品申领相关start -->
+        <mapping
+                class="com.chngenesis.nebula.entity.drugapply.DrugApplyReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drugapply.DrugApplyReceiptDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drugapply.DrugApplyReceiptDetailsDistribution"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drugapply.DrugApplyReceiptDetailsStorage"/>
+        <!-- 药品申领相关end -->
+
+        <!-- 退库相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.batch.RetiringReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.batch.RetiringReceiptDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.batch.StockReceiptDetails"/>
+        <!-- 退库相关 -->
+
+        <!-- 其他出库单 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.receipt.OtherOutBills"/>
+        <!-- 其他出库单 -->
+
+        <!-- 报损单 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.receipt.ReportLossBills"/>
+        <!-- 报损单 -->
+
+        <!-- 初始化盘点管理 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.receipt.InitInventoryReceipt"/>
+        <!-- 初始化盘点管理 -->
+
+        <!-- 关键字上报疾病 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.reportdiseases.KeywordReportDiseases"/>
+        <!-- 关键字上报疾病 -->
+
+        <!-- 样本费用组套 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.checktest.SampleAndCost"/>
+        <!-- 样本费用组套 -->
+
+        <!-- 担保相关 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.security.CollateralType"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.security.CollateralMoneyRecord"/>
+        <!-- 担保相关 -->
+		<mapping
+                class="com.chngenesis.nebula.entity.security.UserCredit"/>
+        <!-- 采购计划 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.purplan.PurchasePlan"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.purplan.PurchasePlanDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.purplan.PurchasePlanReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.purplan.PurPlaDetStoOpeDet"/>
+        <!-- 采购计划 -->
+
+        <!-- 厂商退库 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.retiring.SuppilerRetiringReceipt"/>
+        <!-- 厂商退库 -->
+
+        <!-- 公共药品申领 -->
+        <mapping
+                class="com.chngenesis.nebula.entity.drugapply.PublicDrugApplyReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drugapply.PublicDrugApplyReceiptDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drugapply.PublicDrugApplyReceiptDetailsDistribution"/>
+        <!-- 公共药品申领 -->
+
+        <!-- 药品入库调价单start -->
+        <mapping
+                class="com.chngenesis.nebula.entity.drugprice.DrugJoinPrice"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drugprice.DrugJoinPriceAdjustmentReceipt"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.drugprice.DrugJoinPriceAdjustmentReceiptDetails"/>
+        <!-- 药品入库调价单end -->
+
+        <!-- 病案首页xml -->
+        <mapping class="com.chngenesis.nebula.entity.mra.MraPageLabel"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.mra.MraPageElement"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.mra.MraPageEleCont"/>
+        <!-- 病案首页xml -->
+
+        <!-- 门诊电子病历start -->
+        <mapping
+                class="com.chngenesis.nebula.entity.omr.OutpatientOmr"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.omr.OutpatientOmrDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.omr.OutpatientTemplate"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.omr.OutpatientTemplateDetail"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.omr.OutpatientTemplateWork"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.omr.OmrDiscardedLog"/>
+        <mapping class="com.chngenesis.nebula.entity.omr.OmrUserEntry"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.omr.OmrEntryContent"/>
+        <!-- 门诊电子病历end -->
+
+        <!-- 新生儿登记start -->
+        <mapping
+                class="com.chngenesis.nebula.entity.newbaby.NewBabyRegisterRecord"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.newbaby.NewBabyDefectsRecord"/>
+        <!-- 新生儿登记end -->
+
+        <!-- 微信公告 -->
+        <mapping class="com.chngenesis.nebula.entity.message.WxNotice"/>
+        <!-- 微信公告 -->
+
+        <!-- 住院交账记录start -->
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.InpatientAccountCategoryDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.InpatientAccountHandover"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.InpatientPaymentCheckoutDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.InpatientReimbursementDetails"/>
+        <mapping
+                class="com.chngenesis.nebula.entity.cost.InpatientUseReceiptDetails"/>
+        <!-- 住院交账记录end -->
+
+        <!-- 位置相关 -->
+        <mapping class="com.chngenesis.nebula.entity.batch.DrugPlace"/>
+        <mapping class="com.chngenesis.nebula.entity.batch.WareHousePlace"/>
+        <!-- 位置相关-->
+
+        <!-- 仓库属性 -->
+        <mapping class="com.chngenesis.nebula.entity.batch.WareHouseType"/>
+        <mapping class="com.chngenesis.nebula.entity.batch.WareHouseTypeAssociated"/>
+        <!-- 仓库属性 -->
+
+        <!-- 样本送样单 -->
+        <mapping class="com.chngenesis.nebula.entity.checktest.SampleSheet"/>
+        <mapping class="com.chngenesis.nebula.entity.checktest.SampleSheetDetails"/>
+        <!-- 样本送样单 -->
+        
+        <!-- 日常盘点 -->
+        <mapping class="com.chngenesis.nebula.entity.receipt.DailyInventoryReceipt"/>
+        <mapping class="com.chngenesis.nebula.entity.batch.DailyInventoryReceiptDetails"/>
+        <!-- 日常盘点 -->
+        
+        <!-- 冻结 -->
+        <mapping class="com.chngenesis.nebula.entity.batch.StockFreezeInfo"/>
+        <!-- 冻结 -->
+    </session-factory>
+</hibernate-configuration>

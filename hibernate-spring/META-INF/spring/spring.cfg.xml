@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/data/mongo
+	http://www.springframework.org/schema/data/mongo/spring-mongo.xsd
+	http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- 配置文件配置 -->	
+	<context:property-placeholder location="/config/config.properties" />
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<!--maxActive: 最大连接数量 -->
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<!--minIdle: 最小空闲连接 -->
+		<property name="minIdle" value="${jdbc.minIdle}" />
+		<!--maxIdle: 最大空闲连接 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<!--initialSize: 初始化连接 -->
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<!-- 连接被泄露时是否打印 -->
+		<property name="logAbandoned" value="${jdbc.logAbandoned}" />
+		<!--removeAbandoned: 是否自动回收超时连接 -->
+		<property name="removeAbandoned" value="${jdbc.removeAbandoned}" />
+		<!--removeAbandonedTimeout: 超时时间(以秒数为单位) -->
+		<property name="removeAbandonedTimeout" value="${jdbc.removeAbandonedTimeout}" />
+		<!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒 -->
+		<property name="maxWait" value="${jdbc.maxWait}" />
+		<!-- 在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位. -->
+		<property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+		<!-- 在每次空闲连接回收器线程(如果有)运行时检查的连接数量 -->
+		<property name="numTestsPerEvictionRun" value="${jdbc.numTestsPerEvictionRun}" />
+		<!-- 1000 * 60 * 30 连接在池中保持空闲而不被空闲连接回收器线程 -->
+		<property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+		<property name="validationQuery">
+			<value>select 1 from dual</value>
+		</property>
+	</bean>
+
+	<!-- 由spring创建hibernate的工厂对象 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		lazy-init="false">
+		<!-- 注入datasource，给sessionfactoryBean(工厂对象)内setdatasource提供数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 加载核心配置文件 -->
+		<property name="configLocation" value="classpath:/hibernate.cfg.xml"></property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.autoReconnect">true</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- 使用annotation定义事务 -->
+	<bean id="defaultTransactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="defaultTransactionManager"
+		proxy-target-class="true" />
+
+	<!-- spring连接mongodb数据库的配置 spring 多MongoDB配置 -->
+	<mongo:mongo-client id="mongo" host="${mongo.host}"
+		port="${mongo.port}">
+
+		<mongo:client-options connections-per-host="${mongo.connectionsPerHost}"
+			min-connections-per-host="${mongo.minConnectionsPerHost}"
+			threads-allowed-to-block-for-connection-multiplier="${mongo.threadsAllowedToBlockForConnectionMultiplier}"
+			connect-timeout="${mongo.connectTimeout}" max-wait-time="${mongo.maxWaitTime}"
+			socket-keep-alive="${mongo.socketKeepAlive}" socket-timeout="${mongo.socketTimeout}"
+			max-connection-idle-time="${mongo.maxConnectionIdleTime}"
+			max-connection-life-time="${mongo.maxConnectionLifeTime}"
+			heartbeat-socket-timeout="${mongo.heartbeatSocketTimeout}"
+			heartbeat-connect-timeout="${mongo.heartbeatConnectTimeout}"
+			min-heartbeat-frequency="${mongo.minHeartbeatFrequency}"
+			heartbeat-frequency="10000" />
+	</mongo:mongo-client>
+
+	<mongo:db-factory dbname="database" mongo-ref="mongo" />
+	<!-- HeavenPool  -->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg name="databaseName" value="HeavenPool" />
+	</bean>
+
+	<!-- 日志MongoDB -->
+	<bean id="mongoTemplateLog" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg name="databaseName" value="log" />
+	</bean>
+
+	<!-- 数据存储MongoDB -->
+	<bean id="mongoTemplatedataStorage" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg name="databaseName" value="dataStorage" />
+	</bean>
+
+	<!--微信公众号配置 -->
+	<bean id="wxMpConfigStorage" class="me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage">
+		<property name="appId" value="${wechat.mp.appid}" />
+		<property name="secret" value="${wechat.mp.secret}" />
+		<property name="token" value="${wechat.mp.token}" />
+		<property name="aesKey" value="${wechat.mp.aesKey}" />
+	</bean>
+
+	<!-- 微信公众号 Http客户端 -->
+	<bean id="wxMpService"
+		class="me.chanjar.weixin.mp.api.impl.WxMpServiceApacheHttpClientImpl">
+		<property name="wxMpConfigStorage" ref="wxMpConfigStorage" />
+	</bean>
+
+	<bean id="wxPayConfig" class="com.github.binarywang.wxpay.config.WxPayConfig">
+		<property name="appId" value="${wechat.pay.appid}" />
+		<property name="subAppId" value="${wechat.pay.subAppId}" />
+		<property name="mchId" value="${wechat.pay.mchId}" />
+		<property name="mchKey" value="${wechat.pay.mchKey}" />
+		<property name="subMchId" value="${wechat.pay.subMchId}" />
+		<property name="notifyUrl" value="${wechat.pay.notifyUrl}" />
+		<property name="tradeType" value="${wechat.pay.tradeType}" />
+		<property name="signType" value="${wechat.pay.signType}" />
+	</bean>
+
+	<bean id="wxPayService"
+		class="com.github.binarywang.wxpay.service.impl.WxPayServiceApacheHttpImpl">
+		<property name="config" ref="wxPayConfig" />
+	</bean>
+
+	<bean id="alipayClient" class="com.alipay.api.DefaultAlipayClient">
+		<constructor-arg name="serverUrl" value="${alipay.serverUrl}" />
+		<constructor-arg name="appId" value="${alipay.appid}" />
+		<constructor-arg name="privateKey" value="${alipay.privateKey}" />
+		<constructor-arg name="format" value="${alipay.format}" />
+		<constructor-arg name="charset" value="${alipay.charset}" />
+		<constructor-arg name="alipayPublicKey" value="${alipay.publicKey}" />
+		<constructor-arg name="signType" value="${alipay.signType}" />
+	</bean>
+
+	<!-- 要执行任务的任务类。 -->
+<!-- 	<bean id="queryJobQuartz"
+		class="com.chngenesis.nebula.entity.wechatpay.WechatPayMicroQueryJob">
+	</bean> -->
+
+	<!-- 将需要执行的定时任务注入JOB中。 -->
+<!-- 	<bean id="queryJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="queryJobQuartz"></property>
+		任务类中需要执行的方法
+		<property name="targetMethod" value="pollingQuery"></property>
+		上一次未执行完成的，要等待有再执行。
+		<property name="concurrent" value="false"></property>
+		<property name="name" value="${jobName}" />
+		<property name="group" value="${groupName}" />
+
+	</bean> -->
+
+	<!-- 基本的定时器，会绑定具体的任务。 -->
+<!-- 	<bean id="simplTrigger"
+		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+		<property name="jobDetail" ref="queryJob"></property>
+		<property name="repeatInterval" value="5000"></property>
+		<property name="repeatCount" value="6" />
+	</bean> -->
+
+	<bean id="schedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!-- <property name="triggers">
+			<list>
+				<ref bean="simplTrigger"></ref>
+			</list>
+		</property> -->
+		 <!-- 这里配置任务不随spring容器初始化而自动启动 -->    
+        <property name="autoStartup" value="false"/>  
+	</bean>
+	
+    <bean id="springContextUtil"
+		class="com.chngenesis.nebula.util.SpringContextUtil"></bean>
+
+</beans>
+	
